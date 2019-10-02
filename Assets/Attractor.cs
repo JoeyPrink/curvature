@@ -7,38 +7,27 @@ public class Attractor : MonoBehaviour {
     public float maxRange = 4;
     public float strength = 1;
 
-    public bool repulsor = true;
+    public bool repulsor = false;
 
-    public Vector3 GetAttractDir(Vector3 restPos) {
-        if (repulsor)
-        {
-            Vector3 result = transform.position - restPos;
-            float dist = result.magnitude;
-            float force = 1 - Mathf.Pow(Mathf.Clamp01((dist - minRange) / (maxRange - minRange)), 2);
-            force *= -strength;
-            result.Normalize();
-            result *= force;
-            return result;
+    public Vector3 GetAttractDir(Vector3 initialPos) {
+        Vector3 result = transform.position - initialPos;
+        float dist = result.magnitude;
+        float force = 1 - Mathf.Pow(Mathf.Clamp01((dist - minRange) / (maxRange - minRange)), 2);
+        force *= strength;
+        if (repulsor) {
+            force *= -1;
         }
-        else
-        {
-            Vector3 result = transform.position - restPos;
-            float dist = result.magnitude;
-            float force = 1 - Mathf.Clamp01(Mathf.Pow((dist - minRange) / (maxRange - minRange), 2));
-            force *= strength;
-            result *= force;
-
-            result = result.normalized * (Mathf.Sign(result.magnitude) * Mathf.Sqrt(result.magnitude));
-            return result;
-        }
+        result.Normalize();
+        result *= force;
+        return result;
     }
 
     private void OnDrawGizmos() {
         Color col = Gizmos.color;
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(transform.position, minRange);
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireSphere(transform.position, maxRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, minRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, maxRange);
         Gizmos.color = col;
     }
 }

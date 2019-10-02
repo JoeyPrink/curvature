@@ -68,13 +68,23 @@ public class Polyline : MonoBehaviour {
         */
     }
 
+    private int numIterations = 20;
     public void Deform(List<Attractor> attractors) {
         for (int i = 1; i < verts.Count - 1; i++) {
             Vertex vert = verts[i];
             vert.currentPos = vert.restPos;
-            foreach (Attractor attractor in attractors) {
-                Vector3 dir = attractor.GetAttractDir(vert.restPos);
-                vert.currentPos += dir;
+            
+            for (int j=0; j<numIterations; j++) {
+                Vector3 currentPos = vert.currentPos;
+                foreach (Attractor attractor in attractors) {
+                    Vector3 dir = attractor.GetAttractDir(vert.currentPos);
+
+                    dir *= 1f / numIterations;
+                    
+                    currentPos += dir;
+                }
+
+                vert.currentPos = currentPos;
             }
 
             verts[i] = vert;
