@@ -10,7 +10,7 @@ public class Attractor : MonoBehaviour {
         Vector3 result = transform.position-restPos;
         float dist = result.magnitude;
         result /= dist;
-        float force = Mathf.Pow(1 - Mathf.Clamp01(dist / range), 2) * strength;
+        float force = Mathf.Pow(1 - Mathf.Clamp01(dist / range), 1) * strength;
         force = Mathf.Clamp01(force);
         result *= force;
         return result;

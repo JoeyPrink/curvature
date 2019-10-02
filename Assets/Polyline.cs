@@ -35,7 +35,7 @@ public class Polyline : MonoBehaviour {
     }
 
     public void Deform(List<Attractor> attractors) {
-        for (int i = 0; i < verts.Count; i++) {
+        for (int i = 1; i < verts.Count - 1; i++) {
             Vertex vert = verts[i];
             vert.currentPos = vert.restPos;
             foreach (Attractor attractor in attractors) {
