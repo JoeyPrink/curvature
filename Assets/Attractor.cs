@@ -12,7 +12,6 @@ public class Attractor : MonoBehaviour {
         float dist = result.magnitude;
         float force = 1-Mathf.Clamp01(Mathf.Pow((dist - minRange) / (maxRange - minRange), 2));
         force *= strength;
-        
         result *= force;
         return result;
     }
