@@ -25,13 +25,47 @@ public class Polyline : MonoBehaviour {
     [SerializeField]
     private int subdivisions = 0;
 
+    /*
+    [SerializeField]
+    private Transform critter;
+    private float critterPos = 0.5f;
+    private float critterDir = 1;
+    [SerializeField]
+    private float critterSpeed = 1;
+    */
+    
+
     void Start() {
         Create();
     }
 
-    void Update()
-    {
-        
+    void Update() {
+        /*
+        critterPos += critterDir*Time.deltaTime;
+        critterPos = Mathf.Clamp01(critterPos);
+        if (critterPos == 0 || critterPos == 1) {
+            critterDir *= -1;
+        }
+
+        float totalDist = 0;
+        for (int i = 1; i < verts.Count; i++) {
+            float cDist = (verts[i].currentPos - verts[i - 1].currentPos).magnitude;
+            totalDist += cDist;
+        }
+
+        float targetDist = totalDist * critterPos;
+        totalDist = 0;
+        for (int i = 1; i < verts.Count; i++) {
+            float cDist = (verts[i].currentPos - verts[i - 1].currentPos).magnitude;
+            if (totalDist + cDist >= targetDist) {
+                float t = (targetDist - totalDist)/cDist;
+                Vector3 result = t * (verts[i].currentPos - verts[i - 1].currentPos) + verts[i - 1].currentPos;
+                critter.position = result;
+                break;
+            }
+            totalDist += cDist;
+        }
+        */
     }
 
     public void Deform(List<Attractor> attractors) {
