@@ -71,17 +71,20 @@ public class Polyline : MonoBehaviour {
         }
         
         Color col = Gizmos.color;
-        Gizmos.color = Color.gray;
         for (int i = 1; i < verts.Count; i++) {
-            Vector3 segmentStart = verts[i-1].restPos;
-            Vector3 segmentEnd = verts[i].restPos;
-            Gizmos.DrawLine(segmentStart, segmentEnd);
-        }    
-        Gizmos.color = Color.cyan;
+            Vector3 segmentStart, segmentEnd;
+            Gizmos.color = Color.black;
+            Gizmos.DrawLine(verts[i-1].restPos, verts[i-1].currentPos);
 
-        for (int i = 1; i < verts.Count; i++) {
-            Vector3 segmentStart = verts[i-1].currentPos;
-            Vector3 segmentEnd = verts[i].currentPos;
+            
+            Gizmos.color = Color.gray;
+            segmentStart = verts[i-1].restPos;
+            segmentEnd = verts[i].restPos;
+            Gizmos.DrawLine(segmentStart, segmentEnd);
+
+            Gizmos.color = Color.cyan;
+            segmentStart = verts[i-1].currentPos;
+            segmentEnd = verts[i].currentPos;
             Gizmos.DrawLine(segmentStart, segmentEnd);
         }    
 
