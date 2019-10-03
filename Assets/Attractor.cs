@@ -18,6 +18,7 @@ public class Attractor : MonoBehaviour {
             force *= -strength;
             result.Normalize();
             result *= force;
+            result = result.normalized * (Mathf.Log(result.magnitude + 1));
             return result;
         }
         else
@@ -27,8 +28,8 @@ public class Attractor : MonoBehaviour {
             float force = 1 - Mathf.Clamp01(Mathf.Pow((dist - minRange) / (maxRange - minRange), 2));
             force *= strength;
             result *= force;
-
-            result = result.normalized * (Mathf.Sign(result.magnitude) * Mathf.Sqrt(result.magnitude));
+                
+            result = result.normalized * (Mathf.Log(result.magnitude + 1));
             return result;
         }
     }
