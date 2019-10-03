@@ -30,9 +30,9 @@ public class Attractor : MonoBehaviour {
 
     private void OnDrawGizmos() {
         Color col = Gizmos.color;
-        Gizmos.color = new Color(1,0,0,0.5f);
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, minRange);
-        Gizmos.color = new Color(1, 1, 0, 0.5f);
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, maxRange);
         Gizmos.color = col;
     }

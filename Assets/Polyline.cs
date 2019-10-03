@@ -105,6 +105,7 @@ public class Polyline : MonoBehaviour {
 
     private void Create() {
         verts.Clear();
+        /*
         Vector3 start, end;
         end = transform.GetChild(0).position;
         
@@ -118,6 +119,40 @@ public class Polyline : MonoBehaviour {
             }
         }
         verts.Add(new Vertex(end));
+        */
+
+        Transform start, end;
+        end = transform.GetChild(0);
+        for (int i = 1; i < transform.childCount; i++) {
+            start = end;
+            end = transform.GetChild(i);
+
+            Vector3 p1 = start.position;
+            Vector3 p2 = end.position;
+            Vector3 h1, h2; // bezier handles
+            if (start.childCount > 0) {
+                h1 = start.GetChild(start.childCount-1).position; // out
+            }
+            else {
+                h1 = start.position;
+            }
+            if (end.childCount > 0) {
+                h2 = end.GetChild(0).position; // in
+            }
+            else {
+                h2 = end.position;
+            }
+
+            for (int j = 0; j < subdivisions + 1; j++) {
+                float t = j / (float) subdivisions;
+                Vector3 pos = Mathf.Pow(1 - t, 3) * p1
+                              + 3 * Mathf.Pow(1 - t, 2) * t * h1
+                              + 3 * (1 - t) * Mathf.Pow(t, 2) * h2
+                              + Mathf.Pow(t, 3) * p2;
+                              
+                verts.Add(new Vertex(pos));
+            }
+        }
     }
     
 
@@ -125,6 +160,8 @@ public class Polyline : MonoBehaviour {
         if (!Application.isPlaying) {
             Create();
         }
+
+        DrawBezierHandles();
         
         Color col = Gizmos.color;
         for (int i = 1; i < verts.Count; i++) {
@@ -154,6 +191,24 @@ public class Polyline : MonoBehaviour {
             Gizmos.DrawCube(verts[0].currentPos, new Vector3(0.3f, 0.3f, 0.3f));
         }
 
+        Gizmos.color = col;
+    }
+
+    private void DrawBezierHandles() {
+        Color col = Gizmos.color;
+
+        // end, start / out, in
+        Color[] handleColors = new Color[] {new Color(0.3f, 0.5f, 0.6f), new Color(0.4f, 0.8f, 1f)};
+        foreach (Transform child in transform) {
+            Vector3 centerPos = child.position;
+            if (child.childCount != 0) {
+                for (int i = 0; i < child.childCount; i++) {
+                    Gizmos.color = handleColors[Mathf.Min(handleColors.Length - 1, i)];
+                    Gizmos.DrawLine(centerPos, child.GetChild(i).position);
+                }
+            }
+        }
+        
         Gizmos.color = col;
     }
 }

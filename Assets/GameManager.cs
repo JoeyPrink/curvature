@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < lines.Count; i++) {
             lines[i].Deform(attractors);
         }
-
+        
         // calculate connections
         var start = lines.FirstOrDefault(l => l.Type == PolylineType.Start);
         if (start == null)
