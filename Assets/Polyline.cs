@@ -28,6 +28,8 @@ public class Polyline : MonoBehaviour {
 
     public bool Connected = false;
 
+    public bool Blocked = false;
+
     public PolylineType Type = PolylineType.Intermediate;
 
     [SerializeField]
@@ -194,6 +196,13 @@ public class Polyline : MonoBehaviour {
         DrawBezierHandles();
         
         Color col = Gizmos.color;
+
+        var baseColor = Color.cyan;
+        if (Blocked)
+            baseColor = Color.Lerp(new Color(1, 0, 1), Color.black, 0.5f);
+        else if (Connected)
+            baseColor = Color.green;
+
         for (int i = 1; i < verts.Count; i++) {
             Vector3 segmentStart, segmentEnd;
             Gizmos.color = Color.black;
@@ -205,7 +214,7 @@ public class Polyline : MonoBehaviour {
             segmentEnd = verts[i].restPos;
             Gizmos.DrawLine(segmentStart, segmentEnd);
 
-            Gizmos.color = (Connected) ? Color.green : Color.cyan;
+            Gizmos.color = baseColor;
             segmentStart = verts[i-1].currentPos;
             segmentEnd = verts[i].currentPos;
             Gizmos.DrawLine(segmentStart, segmentEnd);
@@ -217,7 +226,7 @@ public class Polyline : MonoBehaviour {
             Gizmos.DrawCube(verts[0].currentPos, new Vector3(0.3f, 0.3f, 0.3f));
         } else if (Type == PolylineType.End)
         {
-            Gizmos.color = (Connected) ? Color.green : Color.cyan;
+            Gizmos.color = baseColor;
             Gizmos.DrawCube(verts[0].currentPos, new Vector3(0.3f, 0.3f, 0.3f));
         }
 

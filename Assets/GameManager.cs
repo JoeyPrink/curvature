@@ -13,17 +13,32 @@ public class GameManager : MonoBehaviour {
     {
         List<Attractor> attractors;
         List<Polyline> lines;
+        List<Obstacle> obstacles;
         attractors = FindObjectsOfType<Attractor>().ToList();
         lines = FindObjectsOfType<Polyline>().ToList();
+        obstacles = FindObjectsOfType<Obstacle>().ToList();
         for (int i = 0; i < lines.Count; i++) {
             lines[i].Deform(attractors);
         }
-        
-        // calculate connections
+
+        // calculate blocked lines
+        var blockedLines = PolylineService.CalculatedBlocked(lines, obstacles);
+
+        // mark blocked lines
+        foreach (var l in lines) l.Blocked = false;
+        foreach (var bl in blockedLines)
+        {
+            bl.Blocked = true;
+        }
+
+        // calculate connections, exclude blocked lines
         var start = lines.FirstOrDefault(l => l.Type == PolylineType.Start);
         if (start == null)
             Debug.LogWarning("No starting PolyLine defined!");
-        var connected = PolylineService.CalculateConnected(start, lines); // TODO: do not calculate each frame
+
+        IEnumerable<Polyline> connected = new List<Polyline>();
+        if (!blockedLines.Contains(start)) // consider special case when start line is already blocked as well
+            connected = PolylineService.CalculateConnected(start, lines.Except(blockedLines)); // TODO: do not calculate each frame
 
         // mark connected lines
         foreach (var l in lines) l.Connected = false;
