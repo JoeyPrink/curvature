@@ -71,7 +71,8 @@
                     return half4(0,0,0,0);
                 }
                 
-                float overlay = sin(_Time.y*_Speed*_MaxRange*-_Direction+dist*_Frequency*_MaxRange)*0.5+0.5;
+                
+                float overlay = sin(_Time.y*_Speed*_MaxRange*-_Direction+pow(dist,0.5)*_Frequency*_MaxRange)*0.5+0.5;
                 
                 float innerDist = _MinRange/_MaxRange;
                 float l = saturate((dist-innerDist)/(1-innerDist));
