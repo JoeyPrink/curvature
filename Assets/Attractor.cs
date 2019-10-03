@@ -11,6 +11,8 @@ public class Attractor : MonoBehaviour {
 
     public bool repulsor = false;
 
+    public MeshRenderer preview;
+
     public Vector3 GetAttractDir(Vector3 currentPos, Vector3 restPos) {
         Vector3 result = transform.position - currentPos;
         float dist = (transform.position - restPos).magnitude;
@@ -26,6 +28,12 @@ public class Attractor : MonoBehaviour {
         result.Normalize();
         result *= force;
         return result;
+    }
+
+    private void Update() {
+        preview.material.SetFloat("_MinRange", minRange);
+        preview.material.SetFloat("_MaxRange", maxRange);
+        preview.material.SetFloat("_Direction", (repulsor) ? 1 : -1);
     }
 
     private void OnDrawGizmos() {

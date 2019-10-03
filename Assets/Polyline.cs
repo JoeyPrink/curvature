@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEditor;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
 
 public struct Vertex {
@@ -37,50 +35,97 @@ public class Polyline : MonoBehaviour {
     [SerializeField]
     private int subdivisions = 0;
 
-    /*
     [SerializeField]
-    private Transform critter;
-    private float critterPos = 0.5f;
-    private float critterDir = 1;
-    [SerializeField]
-    private float critterSpeed = 1;
-    */
+    private float lineWidth = 0.2f;
 
+    
     public List<Vertex> Verts => verts;
+
+    private MeshRenderer meshRenderer;
+    private MeshFilter meshFilter;
+    private Mesh mesh;
+    private LineRenderer lineRenderer;
+
+    private int numVerts;
+    private int numTris;
+    
+    [Header("Drawing order")]
+    [SerializeField]
+    private float lineZ = -0.5f;
+    [SerializeField]
+    private float areaZ = -0.0f;
+
     
 
     void Start() {
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshFilter = GetComponent<MeshFilter>();
+        mesh = new Mesh();
         Create();
+        numVerts = verts.Count * 2;
+        numTris = (verts.Count * 2 - 2)*3;
+        mesh.vertices = new Vector3[numVerts];
+        mesh.triangles = new int[numTris];
+        mesh.uv = new Vector2[numVerts];
+        mesh.colors = new Color[numVerts];
+        mesh.normals = new Vector3[numVerts];
+        mesh.MarkDynamic();
+        meshFilter.mesh = mesh;
+
+        lineRenderer = GetComponent<LineRenderer>();
+        
     }
 
     void Update() {
-        /*
-        critterPos += critterDir*Time.deltaTime;
-        critterPos = Mathf.Clamp01(critterPos);
-        if (critterPos == 0 || critterPos == 1) {
-            critterDir *= -1;
-        }
-
-        float totalDist = 0;
-        for (int i = 1; i < verts.Count; i++) {
-            float cDist = (verts[i].currentPos - verts[i - 1].currentPos).magnitude;
-            totalDist += cDist;
-        }
-
-        float targetDist = totalDist * critterPos;
-        totalDist = 0;
-        for (int i = 1; i < verts.Count; i++) {
-            float cDist = (verts[i].currentPos - verts[i - 1].currentPos).magnitude;
-            if (totalDist + cDist >= targetDist) {
-                float t = (targetDist - totalDist)/cDist;
-                Vector3 result = t * (verts[i].currentPos - verts[i - 1].currentPos) + verts[i - 1].currentPos;
-                critter.position = result;
-                break;
-            }
-            totalDist += cDist;
-        }
-        */
+        RebuildMesh();
     }
+
+    private void RebuildMesh() {
+        Vector3[] v = mesh.vertices;
+        int[] t = mesh.triangles;
+        Vector2[] uv = mesh.uv;
+        Color[] col = mesh.colors;
+        Vector3[] n = mesh.normals;
+
+        for (int i = 0; i < verts.Count; i++) {
+            v[i * 2] = transform.InverseTransformPoint(verts[i].restPos + Vector3.forward*areaZ);
+            v[i * 2+1] = transform.InverseTransformPoint(verts[i].currentPos + Vector3.forward*areaZ);
+            float currU = i / (float) (verts.Count - 1);
+            uv[i*2] = new Vector2(currU, 0);
+            uv[i*2+1] = new Vector2(currU, 1);
+            n[i*2] = new Vector3(0, 0, -1);
+            n[i*2+1] = new Vector3(0, 0, -1);
+            col[i*2] = Color.gray;
+            col[i*2+1] = Color.white;
+        }
+
+        int triIndex = 0;
+        for (int i = 0; i < verts.Count - 1; i++) {
+            int startIndex = i * 2;
+            t[triIndex++] = startIndex;
+            t[triIndex++] = startIndex+1;
+            t[triIndex++] = startIndex+2;
+            t[triIndex++] = startIndex+1;
+            t[triIndex++] = startIndex+3;
+            t[triIndex++] = startIndex+2;
+        }
+
+        mesh.vertices = v;
+        mesh.triangles = t;
+        mesh.uv = uv;
+        mesh.colors = col;
+        mesh.normals = n;
+        
+        Vector3[] positions = new Vector3[verts.Count];
+        for (int i = 0; i < verts.Count; i++) {
+            positions[i] = verts[i].currentPos + Vector3.forward*lineZ;
+        }
+
+        lineRenderer.positionCount = verts.Count;
+        lineRenderer.SetPositions(positions);
+        lineRenderer.widthMultiplier = lineWidth;
+    }
+    
 
     private int numIterations = 20;
     public void Deform(List<Attractor> attractors) {
@@ -107,21 +152,6 @@ public class Polyline : MonoBehaviour {
 
     private void Create() {
         verts.Clear();
-        /*
-        Vector3 start, end;
-        end = transform.GetChild(0).position;
-        
-        for (int i = 1; i < transform.childCount; i++) {
-            start = end;
-            end = transform.GetChild(i).position;
-            verts.Add(new Vertex(start));
-            for (int j = 1; j <= subdivisions; j++) {
-                Vector3 cPos = start+(end - start) * j / (float) subdivisions;
-                verts.Add(new Vertex(cPos));
-            }
-        }
-        verts.Add(new Vertex(end));
-        */
 
         Transform start, end;
         end = transform.GetChild(0);

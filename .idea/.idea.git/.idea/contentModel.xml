@@ -9,6 +9,10 @@
         <e p="Link.cs" t="Include" />
         <e p="Node.cs" t="Include" />
         <e p="Polyline.cs" t="Include" />
+        <e p="PolylineService.cs" t="Include" />
+        <e p="Shaders" t="Include">
+          <e p="LineAreaShader.shader" t="Include" />
+        </e>
       </e>
       <e p="git.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
