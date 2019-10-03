@@ -17,7 +17,6 @@ public class Attractor : MonoBehaviour {
         float force = 1 - Mathf.Pow(Mathf.Clamp01((dist - minRange) / (maxRange - minRange)), 2);
 
         force = forceCurve.Evaluate(force);
-        //force = Mathf.SmoothStep(0, 1, force);
 
         force *= strength;
         if (repulsor) {

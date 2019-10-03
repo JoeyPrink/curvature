@@ -39,7 +39,7 @@ static class PolylineService
 
         return connected;
     }
-    // TODO: brute force implementation, slow, consider improving
+    // TODO: brute force implementation, potentially slow, consider improving
     public static bool IsIntersecting(Polyline a, Polyline b)
     {
         var vertsA = a.Verts;
