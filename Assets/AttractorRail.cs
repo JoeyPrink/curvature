@@ -9,6 +9,8 @@ public class AttractorRail : MonoBehaviour
     private Transform end;
     private Transform attractor;
     private bool isSetup = false;
+    [SerializeField]
+    private LineRenderer railRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class AttractorRail : MonoBehaviour
             end = transform.Find("End");
             attractor = transform.Find("Attractor");
             isSetup = true;
+            railRenderer.SetPositions(new Vector3[] {start.localPosition, end.localPosition});
         }
     }
 
