@@ -89,7 +89,7 @@ public class Polyline : MonoBehaviour {
             for (int j=0; j<numIterations; j++) {
                 Vector3 currentPos = vert.currentPos;
                 foreach (Attractor attractor in attractors) {
-                    Vector3 dir = attractor.GetAttractDir(vert.currentPos);
+                    Vector3 dir = attractor.GetAttractDir(vert.currentPos, vert.restPos);
 
                     dir *= 1f / numIterations;
                     
