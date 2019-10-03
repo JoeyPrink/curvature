@@ -490,6 +490,30 @@ MonoBehaviour:
   minRange: 1
   maxRange: 2
   strength: 1
+  forceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   repulsor: 1
 --- !u!23 &774555444
 MeshRenderer:
@@ -614,6 +638,30 @@ MonoBehaviour:
   minRange: 1
   maxRange: 2
   strength: 1
+  forceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   repulsor: 1
 --- !u!23 &817039054
 MeshRenderer:
@@ -708,6 +756,30 @@ MonoBehaviour:
   minRange: 1
   maxRange: 2
   strength: 1
+  forceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   repulsor: 1
 --- !u!23 &1028323825
 MeshRenderer:
@@ -1037,6 +1109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a4e76cebb453d4887cadbfe37c8333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Connected: 0
+  Type: 2
   subdivisions: 7
 --- !u!4 &1756702799
 Transform:
@@ -1095,6 +1169,30 @@ MonoBehaviour:
   minRange: 1
   maxRange: 2
   strength: 1
+  forceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   repulsor: 1
 --- !u!23 &1907549085
 MeshRenderer:
@@ -1166,7 +1264,7 @@ GameObject:
   - component: {fileID: 1938938373}
   - component: {fileID: 1938938372}
   m_Layer: 0
-  m_Name: LineTestObject (2)
+  m_Name: StartLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1184,6 +1282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a4e76cebb453d4887cadbfe37c8333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Connected: 0
+  Type: 0
   subdivisions: 7
 --- !u!4 &1938938373
 Transform:
@@ -1231,6 +1331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a4e76cebb453d4887cadbfe37c8333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Connected: 0
+  Type: 1
   subdivisions: 7
 --- !u!4 &1940749210
 Transform:
