@@ -93,6 +93,7 @@ public class Polyline : MonoBehaviour {
 
     private void Create() {
         verts.Clear();
+        /*
         Vector3 start, end;
         end = transform.GetChild(0).position;
         
@@ -106,6 +107,41 @@ public class Polyline : MonoBehaviour {
             }
         }
         verts.Add(new Vertex(end));
+        */
+
+        Transform start, end;
+        end = transform.GetChild(0);
+        for (int i = 1; i < transform.childCount; i++) {
+            start = end;
+            end = transform.GetChild(i);
+
+            Vector3 p1 = start.position;
+            Vector3 p2 = end.position;
+            Vector3 h1, h2; // bezier handles
+            if (start.childCount > 0) {
+                h1 = start.GetChild(start.childCount-1).position; // out
+            }
+            else {
+                h1 = start.position;
+            }
+            if (end.childCount > 0) {
+                h2 = end.GetChild(0).position; // in
+            }
+            else {
+                h2 = end.position;
+            }
+//            Debug.Log($"start {start.name} end {end.name} p1 {p1} h1 {h1} h2 {h2} p2 {p2}");
+
+            for (int j = 0; j < subdivisions + 1; j++) {
+                float t = j / (float) subdivisions;
+                Vector3 pos = Mathf.Pow(1 - t, 3) * p1
+                              + 3 * Mathf.Pow(1 - t, 2) * t * h1
+                              + 3 * (1 - t) * Mathf.Pow(t, 2) * h2
+                              + Mathf.Pow(t, 3) * p2;
+                              
+                verts.Add(new Vertex(pos));
+            }
+        }
     }
     
 
@@ -113,6 +149,8 @@ public class Polyline : MonoBehaviour {
         if (!Application.isPlaying) {
             Create();
         }
+
+        DrawBezierHandles();
         
         Color col = Gizmos.color;
         for (int i = 1; i < verts.Count; i++) {
@@ -133,5 +171,74 @@ public class Polyline : MonoBehaviour {
         }    
 
         Gizmos.color = col;
+    }
+
+    private void DrawBezierHandles() {
+        Color col = Gizmos.color;
+
+        // end, start / out, in
+        Color[] handleColors = new Color[] {new Color(0.5f, 0.8f, 1), new Color(0.7f, 1f, 0.3f)};
+        foreach (Transform child in transform) {
+            Vector3 centerPos = child.position;
+            if (child.childCount != 0) {
+                for (int i = 0; i < child.childCount; i++) {
+                    Gizmos.color = handleColors[Mathf.Min(handleColors.Length - 1, i)];
+                    Gizmos.DrawLine(centerPos, child.GetChild(i).position);
+                }
+            }
+        }
+        
+        Gizmos.color = col;
+        
+        
+        
+        /*
+        Transform start, end;
+        end = transform.GetChild(0);
+        for (int i = 1; i < transform.childCount; i++) {
+            start = end;
+            end = transform.GetChild(i);
+
+            Vector3 p1 = start.position;
+            Vector3 p2 = end.position;
+            Vector3 h1, h2; // bezier handles
+            
+            if (start.childCount > 0) {
+                h1 = start.GetChild(start.childCount-1).position; // out
+            }
+            else {
+                h1 = start.position;
+            }
+            if (end.childCount > 0) {
+                h2 = end.GetChild(0).position; // in
+            }
+            else {
+                h2 = end.position;
+            }
+//            Debug.Log($"start {start.name} end {end.name} p1 {p1} h1 {h1} h2 {h2} p2 {p2}");
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(p1, 0.1f);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(h1, 0.1f);
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(h2, 0.1f);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(p2, 0.1f);
+            
+            for (int j = 0; j < subdivisions + 1; j++) {
+                float t = j / (float) subdivisions;
+                Vector3 b1 = Vector3.Lerp(p1, h1, Mathf.Pow(t,2f)); // p1 to out
+                Vector3 b2 = Vector3.Lerp(h2, p2, Mathf.Pow(t,0.5f)); // in to p2
+                Vector3 pos = Vector3.Lerp(b1, b2, t);
+                Gizmos.color = Color.grey;
+                Gizmos.DrawSphere(b1, 0.05f);
+                Gizmos.DrawSphere(b2, 0.05f);
+                Gizmos.color = Color.white;
+                Gizmos.DrawSphere(pos, 0.05f);
+                verts.Add(new Vertex(pos));
+            }
+        }
+        */
+        
     }
 }
