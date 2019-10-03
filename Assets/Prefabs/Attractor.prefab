@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5681701111462267783}
   - component: {fileID: 5681701111462267782}
   - component: {fileID: 5681701111462267777}
+  - component: {fileID: 8621154610757769365}
   m_Layer: 0
   m_Name: Attractor
   m_TagString: Untagged

@@ -436,6 +436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514871570}
   - component: {fileID: 514871571}
+  - component: {fileID: 514871572}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -467,6 +468,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4028b03b72499ff4daaa84f912f4919a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &514871572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514871569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c4eee1dd11d1a847bfee788e5d76216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &534669902
@@ -520,7 +533,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -1510,12 +1523,12 @@ PrefabInstance:
     - target: {fileID: 3320513610527697317, guid: a5b05aec1dd2a394598d33a9f54577ff,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.02
+      value: -4.97
       objectReference: {fileID: 0}
     - target: {fileID: 3320513610527697317, guid: a5b05aec1dd2a394598d33a9f54577ff,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.72
+      value: 1.94
       objectReference: {fileID: 0}
     - target: {fileID: 3320513610527697317, guid: a5b05aec1dd2a394598d33a9f54577ff,
         type: 3}
