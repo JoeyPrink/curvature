@@ -31,5 +31,6 @@ public class GameManager : MonoBehaviour {
         {
             c.Connected = true;
         }
+
     }
 }
