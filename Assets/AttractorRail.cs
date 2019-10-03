@@ -28,7 +28,7 @@ public class AttractorRail : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         // constrain attractor to line segment
         FindDistanceToSegment(attractor.position, start.position, end.position, out var closestPointOnLine);

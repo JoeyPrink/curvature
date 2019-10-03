@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     {
     }
 
-    void LateUpdate()
+    void Update()
     {
         List<Attractor> attractors;
         List<Polyline> lines;
