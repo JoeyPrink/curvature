@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AttractorRangePreviewMat
-  m_Shader: {fileID: 4800000, guid: 16937835304528a439a2ca976174f9a1, type: 3}
+  m_Name: BackgroundMat
+  m_Shader: {fileID: 4800000, guid: 2ea2b4f41f910684bb4f97265a8363d5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b71d3933ac2ad8845ad337eee7741fa3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -59,28 +59,19 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Direction: -1
     - _DstBlend: 0
-    - _Frequency: 12
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MaxRange: 1
     - _Metallic: 0
-    - _MinRange: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 1.5
     - _SrcBlend: 1
-    - _Thickness: 0.03
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _AnimationColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0.5}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.60784316, g: 0.75686276, b: 0.7372549, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MaxRangeColor: {r: 0.36078432, g: 0.6431373, b: 0.6627451, a: 0.4745098}
-    - _MinRangeColor: {r: 0.92941177, g: 0.41568628, b: 0.3529412, a: 0.65882355}
