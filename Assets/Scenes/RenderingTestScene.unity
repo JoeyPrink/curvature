@@ -687,6 +687,26 @@ PrefabInstance:
       propertyPath: strength
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1601339974681270175, guid: 03e6d0fb343449d4491ca29aba97de86,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601339974681270175, guid: 03e6d0fb343449d4491ca29aba97de86,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601339974681270175, guid: 03e6d0fb343449d4491ca29aba97de86,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601339974681270175, guid: 03e6d0fb343449d4491ca29aba97de86,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000047684
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e6d0fb343449d4491ca29aba97de86, type: 3}
 --- !u!1 &918406494
@@ -1103,11 +1123,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Connected: 0
+  Blocked: 0
   Type: 2
   subdivisions: 7
   lineWidth: 0.2
   lineZ: -0.5
   areaZ: -0
+  disconnectedColor: {r: 0.9433962, g: 0.8155594, b: 0.6630473, a: 1}
+  connectedColor: {r: 0.5613208, g: 1, b: 0.78496116, a: 1}
 --- !u!4 &1756702799
 Transform:
   m_ObjectHideFlags: 0
@@ -1304,11 +1327,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Connected: 0
+  Blocked: 0
   Type: 0
   subdivisions: 10
   lineWidth: 0.2
   lineZ: -0.5
   areaZ: -0
+  disconnectedColor: {r: 0.9433962, g: 0.8155594, b: 0.6630473, a: 1}
+  connectedColor: {r: 0.5613208, g: 1, b: 0.78496116, a: 1}
 --- !u!4 &1938938373
 Transform:
   m_ObjectHideFlags: 0
@@ -1500,11 +1526,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Connected: 0
+  Blocked: 0
   Type: 1
   subdivisions: 7
   lineWidth: 0.2
   lineZ: -0.5
   areaZ: -0
+  disconnectedColor: {r: 0.9433962, g: 0.8155594, b: 0.6630473, a: 1}
+  connectedColor: {r: 0.5613208, g: 1, b: 0.78496116, a: 1}
 --- !u!4 &1940749210
 Transform:
   m_ObjectHideFlags: 0
