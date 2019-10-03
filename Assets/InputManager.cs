@@ -35,7 +35,7 @@ public class InputManager : MonoBehaviour
     {
         GameObject gmObj = null;
         var collider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        if (collider != null)
+        if (collider != null && collider.GetComponent<Attractor>() != null)
         {
             gmObj = collider.gameObject;
         }
