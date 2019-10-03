@@ -179,7 +179,17 @@ public class Polyline : MonoBehaviour {
             segmentStart = verts[i-1].currentPos;
             segmentEnd = verts[i].currentPos;
             Gizmos.DrawLine(segmentStart, segmentEnd);
-        }    
+        }
+
+        if (Type == PolylineType.Start)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(verts[0].currentPos, new Vector3(0.3f, 0.3f, 0.3f));
+        } else if (Type == PolylineType.End)
+        {
+            Gizmos.color = (Connected) ? Color.green : Color.cyan;
+            Gizmos.DrawCube(verts[0].currentPos, new Vector3(0.3f, 0.3f, 0.3f));
+        }
 
         Gizmos.color = col;
     }
