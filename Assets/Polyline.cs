@@ -45,6 +45,7 @@ public class Polyline : MonoBehaviour {
     private MeshFilter meshFilter;
     private Mesh mesh;
     private LineRenderer lineRenderer;
+    private Transform verticesParent;
 
     private int numVerts;
     private int numTris;
@@ -128,6 +129,7 @@ public class Polyline : MonoBehaviour {
     
 
     private int numIterations = 20;
+
     public void Deform(List<Attractor> attractors) {
         for (int i = 1; i < verts.Count - 1; i++) {
             Vertex vert = verts[i];
@@ -154,10 +156,11 @@ public class Polyline : MonoBehaviour {
         verts.Clear();
 
         Transform start, end;
-        end = transform.GetChild(0);
-        for (int i = 1; i < transform.childCount; i++) {
+        verticesParent = transform.Find("Vertices");
+        end = verticesParent.GetChild(0);
+        for (int i = 1; i < verticesParent.childCount; i++) {
             start = end;
-            end = transform.GetChild(i);
+            end = verticesParent.GetChild(i);
 
             Vector3 p1 = start.position;
             Vector3 p2 = end.position;
@@ -238,7 +241,7 @@ public class Polyline : MonoBehaviour {
 
         // end, start / out, in
         Color[] handleColors = new Color[] {new Color(0.3f, 0.5f, 0.6f), new Color(0.4f, 0.8f, 1f)};
-        foreach (Transform child in transform) {
+        foreach (Transform child in verticesParent) {
             Vector3 centerPos = child.position;
             if (child.childCount != 0) {
                 for (int i = 0; i < child.childCount; i++) {
