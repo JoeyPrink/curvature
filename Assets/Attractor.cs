@@ -11,10 +11,10 @@ public class Attractor : MonoBehaviour {
 
     public bool repulsor = false;
 
-    public Vector3 GetAttractDir(Vector3 initialPos) {
-        Vector3 result = transform.position - initialPos;
-        float dist = result.magnitude;
-        float force = 1 - Mathf.Pow(Mathf.Clamp01((dist - minRange) / (maxRange - minRange)), 2);
+    public Vector3 GetAttractDir(Vector3 currentPos, Vector3 restPos) {
+        Vector3 result = transform.position - currentPos;
+        float dist = (transform.position - restPos).magnitude;
+        float force = 1 - Mathf.Clamp01((dist - minRange) / (maxRange - minRange));
 
         force = forceCurve.Evaluate(force);
 
