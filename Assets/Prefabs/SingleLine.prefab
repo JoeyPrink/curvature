@@ -113,11 +113,11 @@ MonoBehaviour:
   Blocked: 0
   Type: 0
   subdivisions: 10
-  lineWidth: 0.2
+  lineWidth: 0.07
   lineZ: -0.5
-  areaZ: -0
-  disconnectedColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  connectedColor: {r: 0.8, g: 1, b: 0.9, a: 1}
+  areaZ: 3
+  disconnectedColor: {r: 0.95686275, g: 0.94509804, b: 0.73333335, a: 1}
+  connectedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!33 &2459922217715951945
 MeshFilter:
   m_ObjectHideFlags: 0
