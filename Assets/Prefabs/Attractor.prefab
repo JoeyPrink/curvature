@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5681701111462267782}
   - component: {fileID: 5681701111462267777}
   m_Layer: 0
-  m_Name: Attractor (1)
+  m_Name: Attractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,17 +90,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027684b0c1abc3441a91676959d90839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRange: 2
+  minRange: 0.92
   maxRange: 3
-  strength: 1
+  strength: 3.68
   forceCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -108,8 +108,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
