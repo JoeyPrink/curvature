@@ -13,7 +13,8 @@
         _AnimationColor ("Animation Color", Color) = (1,1,1,0.5)
         _Speed("Speed", Float) = 1
         _Frequency("Animation Frequency", Float) = 1
-        _Direction("Direction", Float) = 1
+        _Direction("Animation Direction", Float) = 1
+        _Thickness("Animation Thickness", Float) = 0.2
         
     }
     SubShader
@@ -49,7 +50,7 @@
             float4 _MaxRangeColor; 
             float _MinRange;
             float _MaxRange;
-            float _Direction, _Speed;
+            float _Direction, _Speed, _Frequency, _Thickness;
             float4 _AnimationColor;
 
             v2f vert (appdata v)
@@ -69,12 +70,17 @@
                 if (dist > 1) {
                     return half4(0,0,0,0);
                 }
+                
+                float overlay = sin(_Time.y*_Speed*_MaxRange*-_Direction+dist*_Frequency*_MaxRange)*0.5+0.5;
+                
                 float innerDist = _MinRange/_MaxRange;
                 float l = saturate((dist-innerDist)/(1-innerDist));
-                
-                
                 half4 col = tex2D(_MainTex, i.uv);
                 col *= lerp(_MinRangeColor, _MaxRangeColor, l);
+                
+                overlay = overlay>(1-_Thickness);
+                col.rgb = lerp(col.rgb, _AnimationColor.rgb, overlay*_AnimationColor.a);
+                
                 return col;
             }
             ENDCG

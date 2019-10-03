@@ -56,6 +56,10 @@ public class Polyline : MonoBehaviour {
     [SerializeField]
     private float areaZ = -0.0f;
 
+    [SerializeField]
+    private Color disconnectedColor = new Color(0.8f,0.8f,0.8f);
+    [SerializeField]
+    private Color connectedColor = new Color(0.8f, 1.0f, 0.9f);
     
 
     void Start() {
@@ -125,6 +129,7 @@ public class Polyline : MonoBehaviour {
         lineRenderer.positionCount = verts.Count;
         lineRenderer.SetPositions(positions);
         lineRenderer.widthMultiplier = lineWidth;
+        lineRenderer.material.color = Connected ? connectedColor : disconnectedColor;
     }
     
 
