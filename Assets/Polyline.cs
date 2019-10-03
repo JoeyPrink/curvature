@@ -16,11 +16,21 @@ public struct Vertex {
     }
 }
 
+public enum PolylineType
+{
+    Start,
+    End,
+    Intermediate
+}
+
 
 public class Polyline : MonoBehaviour {
 
-//    public List<Transform> vertTransforms = new List<Transform>();
-    private List<Vertex> verts = new List<Vertex>();
+    private readonly List<Vertex> verts = new List<Vertex>();
+
+    public bool Connected = false;
+
+    public PolylineType Type = PolylineType.Intermediate;
 
     [SerializeField]
     private int subdivisions = 0;
@@ -33,6 +43,8 @@ public class Polyline : MonoBehaviour {
     [SerializeField]
     private float critterSpeed = 1;
     */
+
+    public List<Vertex> Verts => verts;
     
 
     void Start() {
@@ -163,7 +175,7 @@ public class Polyline : MonoBehaviour {
             segmentEnd = verts[i].restPos;
             Gizmos.DrawLine(segmentStart, segmentEnd);
 
-            Gizmos.color = Color.cyan;
+            Gizmos.color = (Connected) ? Color.green : Color.cyan;
             segmentStart = verts[i-1].currentPos;
             segmentEnd = verts[i].currentPos;
             Gizmos.DrawLine(segmentStart, segmentEnd);
