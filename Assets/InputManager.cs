@@ -9,10 +9,12 @@ public class InputManager : MonoBehaviour
     public event Action OnGrabAttractor = delegate { };
     public event Action OnReleaseAttractor = delegate { };
 
+    private bool disabled = false;
+
     public void Update()
     {
         Input.simulateMouseWithTouches = true; // HACK
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !disabled)
         {
             if (!isDragging)
             {
@@ -38,6 +40,12 @@ public class InputManager : MonoBehaviour
             }
             isDragging = false;
         }
+    }
+
+    // disables the grab input and releases the currently dragged attractor, if any
+    public void Disable()
+    {
+        disabled = true;
     }
 
     private GameObject GetObjectFromMouseRaycast()
