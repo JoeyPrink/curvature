@@ -27,6 +27,14 @@ public class GameManager : MonoBehaviour
     {
         Playing,
         Won
+    };
+
+    private int fpsCount = 0;
+    private float fpsRunningTotal = 0;
+    private float lastFps = 0;
+
+    void OnGUI() {
+        GUI.Label(new Rect(100,100,200,100), $"FPS: {lastFps}");
     }
 
     void Update()
@@ -52,7 +60,6 @@ public class GameManager : MonoBehaviour
                 foreach (var l in lines.Except(blockedLines))
                 {
                     l.Blocked = false;
-
                 }
                 foreach (var bl in blockedLines)
                 {
@@ -114,6 +121,14 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Won:
                 break;
+	}
+
+        fpsRunningTotal += Time.deltaTime;
+        fpsCount++;
+        if (fpsCount == 10) {
+            lastFps = 1 / (fpsRunningTotal / (float) fpsCount);
+            fpsCount = 0;
+            fpsRunningTotal = 0;
         }
     }
 
