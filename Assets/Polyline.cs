@@ -37,6 +37,9 @@ public class Polyline : MonoBehaviour {
 
     [SerializeField]
     private float lineWidth = 0.2f;
+    [SerializeField]
+    private float lineWidthConnected = 0.15f;
+    private float lineWidthRestPos = 0.04f;
 
     
     public List<Vertex> Verts => verts;
@@ -44,7 +47,10 @@ public class Polyline : MonoBehaviour {
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
     private Mesh mesh;
+    [SerializeField]
     private LineRenderer lineRenderer;
+    [SerializeField]
+    private LineRenderer lineRendererRestPos;
     private Transform verticesParent;
 
     private int numVerts;
@@ -53,6 +59,9 @@ public class Polyline : MonoBehaviour {
     [Header("Drawing order")]
     [SerializeField]
     private float lineZ = -0.5f;
+
+    private float lineZRestPos = 2.5f;
+    
     [SerializeField]
     private float areaZ = -0.0f;
 
@@ -60,7 +69,7 @@ public class Polyline : MonoBehaviour {
     private Color disconnectedColor = new Color(0.8f,0.8f,0.8f);
     [SerializeField]
     private Color connectedColor = new Color(0.8f, 1.0f, 0.9f);
-    
+
 
     void Start() {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -68,7 +77,7 @@ public class Polyline : MonoBehaviour {
         mesh = new Mesh();
         Create();
         numVerts = verts.Count * 2;
-        numTris = (verts.Count * 2 - 2)*3;
+        numTris = (verts.Count * 2 - 2) * 3;
         mesh.vertices = new Vector3[numVerts];
         mesh.triangles = new int[numTris];
         mesh.uv = new Vector2[numVerts];
@@ -76,9 +85,6 @@ public class Polyline : MonoBehaviour {
         mesh.normals = new Vector3[numVerts];
         mesh.MarkDynamic();
         meshFilter.mesh = mesh;
-
-        lineRenderer = GetComponent<LineRenderer>();
-        
     }
 
     void Update() {
@@ -128,7 +134,7 @@ public class Polyline : MonoBehaviour {
 
         lineRenderer.positionCount = verts.Count;
         lineRenderer.SetPositions(positions);
-        lineRenderer.widthMultiplier = lineWidth;
+        lineRenderer.widthMultiplier = Connected ? lineWidthConnected : lineWidth;
         lineRenderer.material.color = Connected ? connectedColor : disconnectedColor;
     }
     
@@ -192,6 +198,16 @@ public class Polyline : MonoBehaviour {
                               
                 verts.Add(new Vertex(pos));
             }
+        }
+        
+        if (lineRendererRestPos != null) {
+            Vector3[] positions = new Vector3[verts.Count];
+            for (int i = 0; i < verts.Count; i++) {
+                positions[i] = verts[i].restPos + Vector3.forward*lineZRestPos;
+            }
+            lineRendererRestPos.positionCount = verts.Count;
+            lineRendererRestPos.SetPositions(positions);
+            lineRendererRestPos.widthMultiplier = lineWidthRestPos;
         }
     }
     
