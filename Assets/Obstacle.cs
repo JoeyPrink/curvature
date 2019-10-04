@@ -7,6 +7,13 @@ public class Obstacle : MonoBehaviour
 {
     public float radius;
 
+    [SerializeField]
+    private MeshRenderer image;
+
+    private void Start() {
+        image.transform.localScale = Vector3.one * radius * 2;
+    }
+    
     private void OnDrawGizmos()
     {
         Color col = Gizmos.color;

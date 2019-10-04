@@ -57,6 +57,10 @@ static class PolylineService
     // TODO: brute force implementation, potentially slow, consider improving
     public static bool IsIntersecting(Polyline a, Polyline b)
     {
+        if (!a.boundingBox.Overlaps(b.boundingBox)) {
+            return false;
+        }
+        
         var vertsA = a.Verts;
         var vertsB = b.Verts;
         for (var i = 0;i < vertsA.Count - 1;i++)
