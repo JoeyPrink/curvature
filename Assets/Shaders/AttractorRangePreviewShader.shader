@@ -87,7 +87,10 @@
                 overlay = overlay>(1-_Thickness);
                 col.rgb = lerp(col.rgb, _AnimationColor.rgb, overlay*_AnimationColor.a);
                 
-                col.rgb = lerp(col.rgb, _OnColor.rgb, _On*_OnColor.a*(1-0.5*((_OnFrequency*_Time.y)%1.0f)));
+                col.rgb = lerp(col.rgb, _OnColor.rgb, _On*_OnColor.a*(1-0.25*((_OnFrequency*_Time.y)%1.0f)));
+                if (dist > 0.9f) {
+                    col.rgb = lerp(col.rgb, _OnColor.rgb, _On);
+                }
                 
                 return col;
             }

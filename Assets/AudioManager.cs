@@ -54,14 +54,14 @@ class AudioManager : MonoBehaviour
         // setup attractor sfx
         var attractorGrabAudioSource = transform.Find("AttractorGrab").GetComponent<AudioSource>();
         var im = transform.Find("/GameManager").GetComponent<InputManager>();
-        im.OnGrabAttractor += () =>
+        im.OnGrabAttractor += (GameObject o) =>
         {
             Debug.Log("Attractor grabbed");
             attractorGrabAudioSource.PlayOneShot(OnGrabAttractor);
 
             attractorGrabAudioSource.Play();
         };
-        im.OnReleaseAttractor += () =>
+        im.OnReleaseAttractor += (GameObject o) =>
         {
             Debug.Log("Attractor released");
             attractorGrabAudioSource.Stop();

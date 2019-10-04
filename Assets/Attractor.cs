@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,21 @@ public class Attractor : MonoBehaviour {
 
     public MeshRenderer preview;
 
+    void Start() {
+        var im = transform.Find("/GameManager").GetComponent<InputManager>();
+        im.OnGrabAttractor += OnGrab;
+        im.OnReleaseAttractor += OnRelease;
+    }
+
+    private void OnGrab(GameObject go) {
+        if (go == gameObject) {
+            preview.material.SetFloat("_On", 1);
+        }
+    }
+    private void OnRelease(GameObject go) {
+        preview.material.SetFloat("_On", 0);
+    }
+    
     public Vector3 GetAttractDir(Vector3 currentPos, Vector3 restPos) {
         Vector3 result = transform.position - currentPos;
         float dist = (transform.position - restPos).magnitude;
