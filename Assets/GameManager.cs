@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public event Action<int> OnNumConnectedChanged = delegate { };
     public event Action OnObstacleHit = delegate { };
     public event Action OnObstacleFreed = delegate { };
+    public event Action OnLevelComplete = delegate { };
 
 
     private int numConnectedLines = 0;
@@ -23,10 +24,10 @@ public class GameManager : MonoBehaviour
     {
         "Level01",
         "Level02",
-        "Level03",
         "Level04",
         "Level05",
-        "Level06"
+        "Level03",
+        "Level06",
     };
 
     public enum GameState
@@ -139,6 +140,8 @@ public class GameManager : MonoBehaviour
             endConnectedCounter += Time.deltaTime;
             if (endConnectedCounter > 1) {
                 gameState = GameState.Won;
+
+                OnLevelComplete();
 
                 // force disable grab input
                 var im = transform.Find("/GameManager").GetComponent<InputManager>();

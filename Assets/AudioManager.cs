@@ -14,6 +14,7 @@ class AudioManager : MonoBehaviour
     public AudioClip OnReleaseAttractor = null;
     public AudioClip OnObstacleHit = null;
     public AudioClip OnObstacleFreed = null;
+    public AudioClip OnLevelComplete = null;
 
     private AudioSource[] musicLayers;
 
@@ -65,6 +66,12 @@ class AudioManager : MonoBehaviour
             {
                 Debug.Log("Obstacle freed");
                 audioSource.PlayOneShot(OnObstacleFreed);
+            };
+
+            gm.OnLevelComplete += () =>
+            {
+                Debug.Log("Level complete");
+                audioSource.PlayOneShot(OnLevelComplete);
             };
         }
 
