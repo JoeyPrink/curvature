@@ -86,15 +86,15 @@ static class PolylineService
     }
 
     // line segment 2 line segment intersection test
-    // TODO: has a problem when start and end points are the same
     // taken from https://gamedev.stackexchange.com/questions/26004/how-to-detect-2d-line-on-line-collision
     private static bool IsIntersecting(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
     {
-        // HACK: work around bug that makes lines with equal start and end point report as intersecting with each other
-        if (a == b) return false;
-        if (c == d) return false;
-
         float denominator = ((b.x - a.x) * (d.y - c.y)) - ((b.y - a.y) * (d.x - c.x));
+        if (denominator < 0.000001f) {
+            return false;
+        }
+        
+        
         float numerator1 = ((a.y - c.y) * (d.x - c.x)) - ((a.x - c.x) * (d.y - c.y));
         float numerator2 = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y));
 
