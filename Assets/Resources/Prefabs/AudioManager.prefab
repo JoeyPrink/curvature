@@ -147,8 +147,8 @@ MonoBehaviour:
   OnGrabAttractor: {fileID: 8300000, guid: 95d175fbeba996549bdb08c68be2084e, type: 3}
   OnReleaseAttractor: {fileID: 8300000, guid: fb0fbdeb89733af4294fcaebb9d33cde, type: 3}
   OnObstacleHit: {fileID: 8300000, guid: 456ec6baccb29be419553286f54eac6e, type: 3}
-  OnObstacleFreed: {fileID: 8300000, guid: 91aa8de65b6f7d3449020ec765160b24, type: 3}
-  OnLevelComplete: {fileID: 8300000, guid: e8cd08b0b5ec7cd4da446b76021afa67, type: 3}
+  OnObstacleFreed: {fileID: 8300000, guid: cec84299702fcb445b91de249924771b, type: 3}
+  OnLevelComplete: {fileID: 8300000, guid: 83ca9164cf2aefa48976e90951b88b29, type: 3}
 --- !u!1 &488761491779038573
 GameObject:
   m_ObjectHideFlags: 0
