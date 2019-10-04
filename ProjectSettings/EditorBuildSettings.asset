@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/CurvatureTestScene.unity
-    guid: 67a19b0f34eff0041b6a21555c9e91bf
+  - enabled: 1
+    path: Assets/Scenes/01-Level01RE.unity
+    guid: 570fb6a32aa054ff5beeffc06462dfe4
+  - enabled: 1
+    path: Assets/Scenes/02-Level02RE 1.unity
+    guid: 94841f56a9a6542b69d28a7ecc8c146f
+  - enabled: 1
+    path: Assets/Scenes/03-Level03RE.unity
+    guid: bbcdfd44d1be246eca843539f1ff335f
   m_configObjects: {}
