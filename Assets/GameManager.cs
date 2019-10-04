@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
                     // load and display level complete overlay
                     var p = Resources.Load<GameObject>("Prefabs/LevelCompleteOverlay");
-                    var levelCompleteOverlay = GameObject.Instantiate(p, GameObject.Find("UI").transform);
+                    var levelCompleteOverlay = GameObject.Instantiate(p, GameObject.Find("IngameUI").transform);
                     var continueButton = levelCompleteOverlay.transform.FindDeepComponent<Button>("ContinueButton");
                     continueButton.onClick.AddListener(() => {
                         LoadNextLevel();

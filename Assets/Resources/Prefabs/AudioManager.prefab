@@ -142,10 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc8cd6863f7d4943b5ce29e715ff0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnConnectionAdded: {fileID: 8300000, guid: ff91c2e3f04b78f41993a3a2f6438fff, type: 3}
-  OnConnectionRemoved: {fileID: 8300000, guid: 66b0da03427e1f645ba64098921a9dfe, type: 3}
-  OnGrabAttractor: {fileID: 8300000, guid: ff6751de12efcb944b536799f6aa9d47, type: 3}
-  OnReleaseAttractor: {fileID: 8300000, guid: b58caf4ff698a7b4cb0fdad61b0af920, type: 3}
+  OnConnectionAdded: {fileID: 8300000, guid: 9fac780dc63332341a7c1bd6f1cf0d7e, type: 3}
+  OnConnectionRemoved: {fileID: 8300000, guid: 418792b01859fd246b2c5ec612308dac, type: 3}
+  OnGrabAttractor: {fileID: 8300000, guid: 95d175fbeba996549bdb08c68be2084e, type: 3}
+  OnReleaseAttractor: {fileID: 8300000, guid: fb0fbdeb89733af4294fcaebb9d33cde, type: 3}
 --- !u!1 &488761491779038573
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +729,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d807877da04a10b41af6e58745fec51b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f7570d25712c80d4b95b4b968ae3bd94, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
