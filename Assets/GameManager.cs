@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
 
     public static string[] LevelNames =
     {
+        "Level01",
         "Level03",
+        "Level04",
         "Level05",
         "Level06"
     };
