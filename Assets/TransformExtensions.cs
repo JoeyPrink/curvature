@@ -25,4 +25,11 @@ public static class TransformExtensions
     {
         return t.FindDeep(name).GetComponent<C>();
     }
+    public static void DestroyChildren(this Transform transform)
+    {
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+    }
 }

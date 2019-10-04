@@ -42,6 +42,11 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    internal void Enable()
+    {
+        disabled = false;
+    }
+
     // disables the grab input and releases the currently dragged attractor, if any
     public void Disable()
     {

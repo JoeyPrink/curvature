@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private GameState gameState = GameState.Playing;
 
-    private string[] levelNames =
+    public static string[] LevelNames =
     {
         "01-Level01RE",
         "02-Level02RE 1",
@@ -130,20 +130,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void LoadNextLevel()
+    public static void LoadLevel(string name)
     {
-        var currentLevelIndex = Array.IndexOf(levelNames, SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(name);
+    }
+
+    private static void LoadNextLevel()
+    {
+        var currentLevelIndex = Array.IndexOf(LevelNames, SceneManager.GetActiveScene().name);
         if (currentLevelIndex != -1)
         {
             var nextLevelIndex = currentLevelIndex + 1;
-            if (nextLevelIndex >= levelNames.Length)
+            if (nextLevelIndex >= LevelNames.Length)
             {
                 // TODO: last level, what to do?
                 Debug.Log("This was the last level! Congratulations, I guess? ;)");
             }
             else
             {
-                SceneManager.LoadScene(levelNames[nextLevelIndex]);
+                LoadLevel(LevelNames[nextLevelIndex]);
             }
         } else
         {
