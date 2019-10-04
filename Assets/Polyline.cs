@@ -70,6 +70,7 @@ public class Polyline : MonoBehaviour {
     [SerializeField]
     private Color connectedColor = new Color(0.8f, 1.0f, 0.9f);
 
+    public Rect boundingBox;
 
     void Start() {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -144,6 +145,9 @@ public class Polyline : MonoBehaviour {
 
     public void Deform(List<Attractor> attractors) {
         float oneOverNumIterations = 1f / numIterations;
+        Vector2 min = new Vector2(1e6f, 1e6f);
+        Vector2 max = new Vector2(-1e6f, -1e6f);
+        
         
         for (int i = 1; i < verts.Count - 1; i++) {
             Vertex vert = verts[i];
@@ -163,8 +167,15 @@ public class Polyline : MonoBehaviour {
                 vert.currentPos = currentPos;
             }
 
+            min.x = Mathf.Min(vert.currentPos.x, min.x);
+            min.y = Mathf.Min(vert.currentPos.y, min.y);
+            max.x = Mathf.Max(vert.currentPos.x, max.x);
+            max.y = Mathf.Max(vert.currentPos.y, max.y);
+            
             verts[i] = vert;
         }
+
+        boundingBox = Rect.MinMaxRect(min.x, min.y, max.x, max.y);
     }
 
     private void Create() {
