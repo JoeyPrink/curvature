@@ -110,9 +110,7 @@ public class GameManager : MonoBehaviour
 
                     // load and display level complete overlay
                     var p = Resources.Load<GameObject>("Prefabs/LevelCompleteOverlay");
-                    var levelCompleteOverlay = GameObject.Instantiate(p);
-                    levelCompleteOverlay.GetComponent<Canvas>().worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-                    levelCompleteOverlay.GetComponent<Canvas>().planeDistance = 5; // HACK: manually position ui plane between regular game objects and camera
+                    var levelCompleteOverlay = GameObject.Instantiate(p, GameObject.Find("UI").transform);
                     var continueButton = levelCompleteOverlay.transform.FindDeepComponent<Button>("ContinueButton");
                     continueButton.onClick.AddListener(() => {
                         LoadNextLevel();
