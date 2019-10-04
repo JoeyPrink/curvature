@@ -69,6 +69,8 @@ public class Polyline : MonoBehaviour {
     private Color disconnectedColor = new Color(0.8f,0.8f,0.8f);
     [SerializeField]
     private Color connectedColor = new Color(0.8f, 1.0f, 0.9f);
+    [SerializeField]
+    private Color blockedColor = new Color(237.0f/255, 106f/255, 90f/255);
 
     public Rect boundingBox;
 
@@ -137,7 +139,7 @@ public class Polyline : MonoBehaviour {
         lineRenderer.positionCount = verts.Count;
         lineRenderer.SetPositions(positions);
         lineRenderer.widthMultiplier = Connected ? lineWidthConnected : lineWidth;
-        lineRenderer.material.color = Connected ? connectedColor : disconnectedColor;
+        lineRenderer.material.color = Blocked ? blockedColor : Connected ? connectedColor : disconnectedColor;
     }
     
 
