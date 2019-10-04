@@ -155,6 +155,7 @@ public class GameManager : MonoBehaviour
         }
         else {
             endConnectedCounter = 0;
+            Shader.SetGlobalFloat("_LevelComplete", 0);
         }
         
     }
