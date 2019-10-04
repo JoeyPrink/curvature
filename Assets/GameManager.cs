@@ -158,8 +158,8 @@ public class GameManager : MonoBehaviour
             var nextLevelIndex = currentLevelIndex + 1;
             if (nextLevelIndex >= LevelNames.Length)
             {
-                // TODO: last level, what to do?
-                Debug.Log("This was the last level! Congratulations, I guess? ;)");
+                // last level, show win screen
+                SceneManager.LoadScene("WinScreen");
             }
             else
             {
