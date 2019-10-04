@@ -42,12 +42,16 @@ public class GameManager : MonoBehaviour
 //        GUI.Label(new Rect(100,100,200,100), $"FPS: {lastFps}");
     }
 
+    void Start() {
+        Shader.SetGlobalFloat("_LevelComplete", 0);
+    }
+    
     void Update()
     {
         switch (gameState)
         {
             case GameState.Playing:
-                    UpdateWhilePlaying();
+                UpdateWhilePlaying();
                 break;
             case GameState.Won:
                 break;
@@ -123,6 +127,8 @@ public class GameManager : MonoBehaviour
 
         // check win condition and spawn level complete overlay
         if (end != null && end.Connected) {
+            Shader.SetGlobalFloat("_LevelComplete", 1);
+
             endConnectedCounter += Time.deltaTime;
             if (endConnectedCounter > 1) {
                 gameState = GameState.Won;
