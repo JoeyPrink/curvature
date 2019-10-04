@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     bool isDragging = false;
     GameObject draggingObject;
+
+    public event Action OnGrabAttractor = delegate { };
+    public event Action OnReleaseAttractor = delegate { };
 
     public void Update()
     {
@@ -15,6 +19,7 @@ public class InputManager : MonoBehaviour
                 draggingObject = GetObjectFromMouseRaycast();
                 if (draggingObject)
                 {
+                    OnGrabAttractor();
                     isDragging = true;
                 }
             }
@@ -27,6 +32,10 @@ public class InputManager : MonoBehaviour
         }
         else
         {
+            if (isDragging)
+            {
+                OnReleaseAttractor();
+            }
             isDragging = false;
         }
     }
