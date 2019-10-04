@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
 
     public static string[] LevelNames =
     {
-        "01-Level01RE",
-        "02-Level02RE 1",
-        "03-Level03RE"
+        "Level03",
+        "Level05",
+        "Level06"
     };
 
     public enum GameState
