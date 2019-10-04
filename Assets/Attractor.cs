@@ -32,10 +32,14 @@ public class Attractor : MonoBehaviour {
     private void OnRelease(GameObject go) {
         preview.material.SetFloat("_On", 0);
     }
+
+    public float GetDist2RestPos(Vector3 restPos)
+    {
+        return (attractorPos - restPos).magnitude;
+    }
     
-    public Vector3 GetAttractDir(Vector3 currentPos, Vector3 restPos) {
+    public Vector3 GetAttractDir(Vector3 currentPos, float distToRestPos) {
         Vector3 result = attractorPos - currentPos;
-        float distToRestPos = (attractorPos - restPos).magnitude; // Note: could optimize this away
         float force = 1 - Mathf.Clamp01((distToRestPos - minRange) / falloffRange);
 
         force = forceCurve.Evaluate(force);

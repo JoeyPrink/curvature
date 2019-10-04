@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -147,17 +148,32 @@ public class Polyline : MonoBehaviour {
         float oneOverNumIterations = 1f / numIterations;
         Vector2 min = new Vector2(1e6f, 1e6f);
         Vector2 max = new Vector2(-1e6f, -1e6f);
-        
-        
+
+        // reduce the number of attractors that need checking by doing a quick bounding box test with padding according to the attractors maxRange
+        attractors = attractors.Where(a =>
+        {
+            var paddedBoundingBox = new Rect(boundingBox.position - new Vector2(a.maxRange, a.maxRange), boundingBox.size + new Vector2(a.maxRange * 2, a.maxRange * 2));
+            return paddedBoundingBox.Contains(a.transform.position);
+        }).ToList();
+
+        // optimization structure
+        var dist2RestPositions = new float[attractors.Count];
+
         for (int i = 1; i < verts.Count - 1; i++) {
             Vertex vert = verts[i];
             vert.currentPos = vert.restPos;
-            
-            
+
+            for (int j = 0;j < attractors.Count;j++)
+            {
+                dist2RestPositions[j] = attractors[j].GetDist2RestPos(vert.restPos);
+            }
+
             for (int j=0; j<numIterations; j++) {
                 Vector3 currentPos = vert.currentPos;
-                foreach (Attractor attractor in attractors) {
-                    Vector3 dir = attractor.GetAttractDir(vert.currentPos, vert.restPos);
+                for (int k = 0; k < attractors.Count; k++) {
+                    var attractor = attractors[k];
+                    var dist2RestPos = dist2RestPositions[k];
+                    Vector3 dir = attractor.GetAttractDir(vert.currentPos, dist2RestPos);
 
                     dir *= oneOverNumIterations;
                     

@@ -58,7 +58,7 @@ static class PolylineService
     public static bool IsIntersecting(Polyline a, Polyline b)
     {
         if (!a.boundingBox.Overlaps(b.boundingBox)) {
-//            return false;
+            return false;
         }
         
         var vertsA = a.Verts;
