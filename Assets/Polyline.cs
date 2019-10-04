@@ -140,19 +140,22 @@ public class Polyline : MonoBehaviour {
     }
     
 
-    private int numIterations = 20;
+    private int numIterations = 15;
 
     public void Deform(List<Attractor> attractors) {
+        float oneOverNumIterations = 1f / numIterations;
+        
         for (int i = 1; i < verts.Count - 1; i++) {
             Vertex vert = verts[i];
             vert.currentPos = vert.restPos;
+            
             
             for (int j=0; j<numIterations; j++) {
                 Vector3 currentPos = vert.currentPos;
                 foreach (Attractor attractor in attractors) {
                     Vector3 dir = attractor.GetAttractDir(vert.currentPos, vert.restPos);
 
-                    dir *= 1f / numIterations;
+                    dir *= oneOverNumIterations;
                     
                     currentPos += dir;
                 }
