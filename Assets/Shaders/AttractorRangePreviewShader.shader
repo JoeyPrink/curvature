@@ -15,6 +15,10 @@
         _Frequency("Animation Frequency", Float) = 1
         _Direction("Animation Direction", Float) = 1
         _Thickness("Animation Thickness", Float) = 0.2
+
+        _OnFrequency("ON Frequency", Float) = 6
+        _OnColor("ON Color", Color) = (1,1,1,0.25)
+        _On("ON", Range(0,1)) = 0
         
     }
     SubShader
@@ -51,7 +55,8 @@
             float _MinRange;
             float _MaxRange;
             float _Direction, _Speed, _Frequency, _Thickness;
-            float4 _AnimationColor;
+            float4 _AnimationColor, _OnColor;
+            float _On,_OnFrequency;
 
             v2f vert (appdata v)
             {
@@ -81,6 +86,11 @@
                 
                 overlay = overlay>(1-_Thickness);
                 col.rgb = lerp(col.rgb, _AnimationColor.rgb, overlay*_AnimationColor.a);
+                
+                col.rgb = lerp(col.rgb, _OnColor.rgb, _On*_OnColor.a*(1-0.25*((_OnFrequency*_Time.y)%1.0f)));
+                if (dist > 0.9f) {
+                    col.rgb = lerp(col.rgb, _OnColor.rgb, _On);
+                }
                 
                 return col;
             }

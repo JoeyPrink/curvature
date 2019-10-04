@@ -101,7 +101,8 @@ public class Polyline : MonoBehaviour {
         for (int i = 0; i < verts.Count; i++) {
             v[i * 2] = transform.InverseTransformPoint(verts[i].restPos + Vector3.forward*areaZ);
             v[i * 2+1] = transform.InverseTransformPoint(verts[i].currentPos + Vector3.forward*areaZ);
-            float currU = i / (float) (verts.Count - 1);
+//            float currU = i / (float) (verts.Count - 1);
+            float currU = (float) i;
             uv[i*2] = new Vector2(currU, 0);
             uv[i*2+1] = new Vector2(currU, 1);
             n[i*2] = new Vector3(0, 0, -1);
@@ -139,19 +140,22 @@ public class Polyline : MonoBehaviour {
     }
     
 
-    private int numIterations = 20;
+    private int numIterations = 15;
 
     public void Deform(List<Attractor> attractors) {
+        float oneOverNumIterations = 1f / numIterations;
+        
         for (int i = 1; i < verts.Count - 1; i++) {
             Vertex vert = verts[i];
             vert.currentPos = vert.restPos;
+            
             
             for (int j=0; j<numIterations; j++) {
                 Vector3 currentPos = vert.currentPos;
                 foreach (Attractor attractor in attractors) {
                     Vector3 dir = attractor.GetAttractDir(vert.currentPos, vert.restPos);
 
-                    dir *= 1f / numIterations;
+                    dir *= oneOverNumIterations;
                     
                     currentPos += dir;
                 }
@@ -229,9 +233,10 @@ public class Polyline : MonoBehaviour {
 
         for (int i = 1; i < verts.Count; i++) {
             Vector3 segmentStart, segmentEnd;
+            /*
             Gizmos.color = Color.black;
             Gizmos.DrawLine(verts[i-1].restPos, verts[i-1].currentPos);
-
+            */
             
             Gizmos.color = Color.gray;
             segmentStart = verts[i-1].restPos;

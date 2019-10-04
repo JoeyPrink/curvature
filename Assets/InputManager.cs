@@ -6,8 +6,8 @@ public class InputManager : MonoBehaviour
     bool isDragging = false;
     GameObject draggingObject;
 
-    public event Action OnGrabAttractor = delegate { };
-    public event Action OnReleaseAttractor = delegate { };
+    public event Action<GameObject> OnGrabAttractor = delegate { };
+    public event Action<GameObject> OnReleaseAttractor = delegate { };
 
     private bool disabled = false;
 
@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
                 draggingObject = GetObjectFromMouseRaycast();
                 if (draggingObject)
                 {
-                    OnGrabAttractor();
+                    OnGrabAttractor(draggingObject);
                     isDragging = true;
                 }
             }
@@ -36,7 +36,7 @@ public class InputManager : MonoBehaviour
         {
             if (isDragging)
             {
-                OnReleaseAttractor();
+                OnReleaseAttractor(draggingObject);
             }
             isDragging = false;
         }

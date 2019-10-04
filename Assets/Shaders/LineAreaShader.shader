@@ -6,6 +6,11 @@
         _MainTex ("Texture", 2D) = "white" {}
         _Tint("Color Tint", Color) = (1,1,1,1)
         
+        _AnimationColor ("Animation Color", Color) = (1,1,1,0.5)
+        _Speed("Speed", Float) = 1
+        _Frequency("Animation Frequency", Float) = 1
+        _Direction("Animation Direction", Float) = 1
+        _Thickness("Animation Thickness", Float) = 0.2
     }
     SubShader
     {
@@ -39,6 +44,8 @@
             float4 _MainTex_ST;
             float4 _Tint;
             
+            float _Direction, _Speed, _Frequency, _Thickness;
+            float4 _AnimationColor;
 
             v2f vert (appdata v)
             {
@@ -54,6 +61,10 @@
                 half4 col = tex2D(_MainTex, i.uv);
                 col *= i.color;
                 col *= _Tint;
+                float dist = i.uv.y;
+                float overlay = sin(_Time.y*_Speed*-_Direction+pow(dist,0.5)*_Frequency)*0.5+0.5;
+//                overlay = overlay>(1-_Thickness);
+                col.rgb = lerp(col.rgb, _AnimationColor.rgb, overlay*_AnimationColor.a);
                 return col;
             }
             ENDCG
