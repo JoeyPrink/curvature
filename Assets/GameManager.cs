@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     private float endConnectedCounter = 0;
 
     void OnGUI() {
-        GUI.Label(new Rect(100,100,200,100), $"FPS: {lastFps}");
+//        GUI.Label(new Rect(100,100,200,100), $"FPS: {lastFps}");
     }
 
     void Update()
