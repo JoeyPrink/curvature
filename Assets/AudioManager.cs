@@ -12,6 +12,8 @@ class AudioManager : MonoBehaviour
     public AudioClip OnConnectionRemoved = null;
     public AudioClip OnGrabAttractor = null;
     public AudioClip OnReleaseAttractor = null;
+    public AudioClip OnObstacleHit = null;
+    public AudioClip OnObstacleFreed = null;
 
     private AudioSource[] musicLayers;
 
@@ -30,18 +32,18 @@ class AudioManager : MonoBehaviour
 
 
         // setup connection change sfx
-        var gm = transform.Find("/GameManager").GetComponent<GameManager>();
+        var gm = transform.Find("/GameManager")?.GetComponent<GameManager>();
         if (gm != null)
         {
             gm.OnConnectionAdded += () =>
             {
                 Debug.Log("Connection added");
-                audioSource.PlayOneShot(OnConnectionAdded, 0.1f);
+                audioSource.PlayOneShot(OnConnectionAdded);
             };
             gm.OnConnectionRemoved += () =>
             {
                 Debug.Log("Connection removed");
-                audioSource.PlayOneShot(OnConnectionRemoved, 0.1f);
+                audioSource.PlayOneShot(OnConnectionRemoved);
             };
             // change music tracks based on connected lines
             gm.OnNumConnectedChanged += (numConnected) =>
@@ -52,11 +54,23 @@ class AudioManager : MonoBehaviour
                     musicLayers[i].volume = (i < numConnected) ? 1f : 0f;
                 };
             };
+
+            gm.OnObstacleHit += () =>
+            {
+                Debug.Log("Obstacle hit");
+                audioSource.PlayOneShot(OnObstacleHit);
+            };
+
+            gm.OnObstacleFreed += () =>
+            {
+                Debug.Log("Obstacle freed");
+                audioSource.PlayOneShot(OnObstacleFreed);
+            };
         }
 
         // setup attractor sfx
         var attractorGrabAudioSource = transform.Find("AttractorGrab").GetComponent<AudioSource>();
-        var im = transform.Find("/GameManager").GetComponent<InputManager>();
+        var im = transform.Find("/GameManager")?.GetComponent<InputManager>();
         if (im != null)
         {
             im.OnGrabAttractor += (GameObject o) =>

@@ -946,6 +946,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 3318444354903127408, guid: a313d1b63d8d03243a8d935c52223b18,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f433d6cc9aa8d646b3303b6a81911f5, type: 2}
+    - target: {fileID: 3318444354903127414, guid: a313d1b63d8d03243a8d935c52223b18,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 133.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3318444355903336660, guid: a313d1b63d8d03243a8d935c52223b18,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1001,16 +1011,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3318444354903127414, guid: a313d1b63d8d03243a8d935c52223b18,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 133.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318444354903127408, guid: a313d1b63d8d03243a8d935c52223b18,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4f433d6cc9aa8d646b3303b6a81911f5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a313d1b63d8d03243a8d935c52223b18, type: 3}
 --- !u!20 &1589131112 stripped

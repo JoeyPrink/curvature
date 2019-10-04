@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public event Action OnConnectionAdded = delegate { };
     public event Action OnConnectionRemoved = delegate { };
     public event Action<int> OnNumConnectedChanged = delegate { };
+    public event Action OnObstacleHit = delegate { };
+    public event Action OnObstacleFreed = delegate { };
+
 
     private int numConnectedLines = 0;
 
@@ -81,10 +84,14 @@ public class GameManager : MonoBehaviour
         // update blocked and unblocked lines
         foreach (var l in lines.Except(blockedLines))
         {
+            if (l.Blocked)
+                OnObstacleFreed();
             l.Blocked = false;
         }
         foreach (var bl in blockedLines)
         {
+            if (!bl.Blocked)
+                OnObstacleHit();
             bl.Blocked = true;
         }
 

@@ -147,10 +147,10 @@ RectTransform:
   m_Father: {fileID: 991445008}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 256, y: -254.1}
-  m_SizeDelta: {x: 512, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &100436960
 MonoBehaviour:
@@ -496,6 +496,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 3318444354903127408, guid: a313d1b63d8d03243a8d935c52223b18,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f433d6cc9aa8d646b3303b6a81911f5, type: 2}
+    - target: {fileID: 3318444354903127414, guid: a313d1b63d8d03243a8d935c52223b18,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 3318444355903336660, guid: a313d1b63d8d03243a8d935c52223b18,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -551,16 +561,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3318444354903127414, guid: a313d1b63d8d03243a8d935c52223b18,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318444354903127408, guid: a313d1b63d8d03243a8d935c52223b18,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4f433d6cc9aa8d646b3303b6a81911f5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a313d1b63d8d03243a8d935c52223b18, type: 3}
 --- !u!20 &1103325983 stripped
