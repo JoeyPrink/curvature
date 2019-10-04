@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     private float fpsRunningTotal = 0;
     private float lastFps = 0;
 
+    private float endConnectedCounter = 0;
+
     void OnGUI() {
         GUI.Label(new Rect(100,100,200,100), $"FPS: {lastFps}");
     }
@@ -119,22 +121,28 @@ public class GameManager : MonoBehaviour
         }
 
         // check win condition and spawn level complete overlay
-        if (end != null && end.Connected)
-        {
-            gameState = GameState.Won;
+        if (end != null && end.Connected) {
+            endConnectedCounter += Time.deltaTime;
+            if (endConnectedCounter > 1) {
+                gameState = GameState.Won;
 
-            // force disable grab input
-            var im = transform.Find("/GameManager").GetComponent<InputManager>();
-            im.Disable();
+                // force disable grab input
+                var im = transform.Find("/GameManager").GetComponent<InputManager>();
+                im.Disable();
 
-            // load and display level complete overlay
-            var p = Resources.Load<GameObject>("Prefabs/LevelCompleteOverlay");
-            var levelCompleteOverlay = GameObject.Instantiate(p, GameObject.Find("IngameUI").transform);
-            var continueButton = levelCompleteOverlay.transform.FindDeepComponent<Button>("ContinueButton");
-            continueButton.onClick.AddListener(() => {
-                LoadNextLevel();
-            });
+                // load and display level complete overlay
+                var p = Resources.Load<GameObject>("Prefabs/LevelCompleteOverlay");
+                var levelCompleteOverlay = GameObject.Instantiate(p, GameObject.Find("IngameUI").transform);
+                var continueButton = levelCompleteOverlay.transform.FindDeepComponent<Button>("ContinueButton");
+                continueButton.onClick.AddListener(() => {
+                    LoadNextLevel();
+                });
+            }
         }
+        else {
+            endConnectedCounter = 0;
+        }
+        
     }
 
     public static void LoadLevel(string name)
