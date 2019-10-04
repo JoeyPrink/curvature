@@ -58,7 +58,7 @@ static class PolylineService
     public static bool IsIntersecting(Polyline a, Polyline b)
     {
         if (!a.boundingBox.Overlaps(b.boundingBox)) {
-            return false;
+//            return false;
         }
         
         var vertsA = a.Verts;
@@ -93,11 +93,10 @@ static class PolylineService
     // taken from https://gamedev.stackexchange.com/questions/26004/how-to-detect-2d-line-on-line-collision
     private static bool IsIntersecting(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
     {
+        if (a == b) return false;
+        if (c == d) return false;
+
         float denominator = ((b.x - a.x) * (d.y - c.y)) - ((b.y - a.y) * (d.x - c.x));
-        if (denominator < 0.000001f) {
-            return false;
-        }
-        
         
         float numerator1 = ((a.y - c.y) * (d.x - c.x)) - ((a.x - c.x) * (d.y - c.y));
         float numerator2 = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y));
